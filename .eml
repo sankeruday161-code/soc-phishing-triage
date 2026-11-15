@@ -1,0 +1,19 @@
+# 1. Create the samples folder
+mkdir -p samples
+
+# 2. Create the sample email file
+cat << 'EOF' > samples/sample_phish.eml
+From: attacker@malicious-domain.com
+To: victim@company.com
+Subject: Urgent: Verify Your Account
+Received: from mail.attacker-domain.com (185.199.108.153) by mx.company.com
+Date: Fri, 13 Nov 2026 12:00:00 +0000
+
+Dear User,
+Please click the link below immediately to verify your credentials:
+https://malicious-login-fake-site.com/login
+
+Regards,
+IT Support
+EOF
+

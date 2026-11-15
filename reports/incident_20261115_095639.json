@@ -1,0 +1,27 @@
+{
+    "timestamp": "2026-11-15T09:56:39.583950",
+    "email_metadata": {
+        "subject": "Security alert",
+        "sender": "Google <no-reply@accounts.google.com>",
+        "source_ip": "209.85.220.73",
+        "urls_found": [
+            "https://accounts.google.com/RecoverAccount?fpOnly=3D1&amp;source=",
+            "https://www.gstatic.com/images/branding/googlelogo/2x/googlelogo=",
+            "https://myaccount.google.com/notifications",
+            "https://myaccount.google.com/notifi=",
+            "https://accounts.google.com/RecoverAccount?fpOnly=1&source=ancp&Email=mythilihere25@gmail.com&et=0",
+            "https://accounts.google.com/RecoverAccount?fpOnly=3D1&amp;sourc="
+        ]
+    },
+    "threat_intelligence": {
+        "abuseipdb": {
+            "score": 0,
+            "total_reports": 3,
+            "is_whitelisted": true,
+            "country": "FI",
+            "status": "Clean/Low Risk"
+        },
+        "virustotal_urls": []
+    },
+    "triage_status": "LOW RISK / Clean"
+}

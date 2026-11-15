@@ -1,0 +1,20 @@
+{
+    "timestamp": "2026-11-15T10:29:44.036527",
+    "email_metadata": {
+        "subject": "[PHISH] Test Phishing Alert",
+        "sender": "Uday <uu3587257@gmail.com>",
+        "source_ip": "209.85.220.41",
+        "urls_found": []
+    },
+    "threat_intelligence": {
+        "abuseipdb": {
+            "score": 0,
+            "total_reports": 210,
+            "is_whitelisted": true,
+            "country": "FI",
+            "status": "Clean/Low Risk"
+        },
+        "virustotal_urls": []
+    },
+    "triage_status": "LOW RISK / Clean"
+}

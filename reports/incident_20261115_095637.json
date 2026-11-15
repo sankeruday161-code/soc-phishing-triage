@@ -1,0 +1,33 @@
+{
+    "timestamp": "2026-11-15T09:56:37.854282",
+    "email_metadata": {
+        "subject": "\u2705 Finish setting up your new Google Account on your OnePlus Nord 2T 5G",
+        "sender": "Google <no-reply@google.com>",
+        "source_ip": "209.85.220.69",
+        "urls_found": [
+            "http://www=",
+            "https://myaccount.google.com/communication-preferences/auto/unsubscribe/gt/AGSJxQzPl6Y2b9LSKFXDdaHSV-Le_V-5nX2NhQjiLnVIUiMPq5BrlKLpIMlBQR_6O18IQVtqw2Vv6Am6fed5-oN8McGwPuGjpZ5pr7eEUpr7mREjfeRR_gfgfSCgfWmAFldxKsAKm6IJG7-n48UChPaUZHmCwRIW-A-STk2i3YyAB54vQNCPNRpnWTL9rLJu2o299IwoX3P4DwhgmH1S8NyV-kdKe5Wz1Q_b4xN707IQ9t5m-Lnqnfe6?utm_source=gm_header&utm_medium=email",
+            "https://c.gle/AGSJxQxJkp7SahUBMSnZH-p7BEyRPpUHhHp9_PPdhYG5gW5TwmQ2_3IfS0hpcr3xrwbzXnWG-zDEoNTewC1kYaXf1_kn5M0aiJ84om3_b6NzRg87Nfi5au2Jp9J6hYBvOT47WpkN4o787tCqAvgjBumiJQ4M4dM6rapS5LgWOM8loSUt8meoxGEB3FASbLEoMr5ifYdhn6Y3f5FQfn8DH0SDABGOVyumufsJFMGZmxpA6nP-6j3il_7U0iEgj-liIs4JLttBIbL4jYuHefi0JPz51i3jTpJcuz05AwrZVFJJFC0PDb-JHTzc5gwMHU6wesVYxm0E2_THYrD08sYK54Ea0aT9C65BUtO976F8DruYWAb6u81_tZF5ZEryVoTvSuTZG6RhkZqUu84UFk1t96vhfOJOpW8M2t72-SC6V4WqlGeuImvzxtTEzy-OG3GY_lO7nFk-voALEV4BleEcdyicXDV5M6upHRdhDLsZ0rGZNW0Ehjx3XgjYCefQ--3jVsdVmiP79zN8jok81zl_-E71sTzcOCs4lmah-nHEH1l_G9KyN45Xmsm_SLIInNfYSQ7rwsaLbpo82-kFA9NmJ6ZhaP8ZGhbJ9ROg9N40OPZF619q9-Cgx_RRGtUP6PITSpccGfr-77tkpMJX5HM",
+            "https://www.gstatic.com/images/branding/goog=",
+            "https://c.gle/AGSJxQwN9djbLauAv5PrAFP=",
+            "https://c.gle/AGSJxQxQZ9iaWAr0ZDgsa69DLJ_mUnGxG7hGfnvCtAo022hOUFaeHXtYq7VJ3FBhWrJ8u3Qv0P8bTl48gx7f98d1-Z7DWjtndtRp-GbGWEFf4lyiStnBwUfrwIk2wr8su5k8bIdKjb7ui-Amujiz45rmn4AJNODYX9bbMZ7Git6dVr8A44_b9vghqXhbv4F45zSplWE3dJtw6IX4O3-KDcMw2I0RGzq4xV2mt6pk4h-pDlSf-LM2CbVCO_U2jHJ6w1HBqyG6fF8XhEhDm8JgRGamIvXcmAP9vs-mFXueb0uOEB3sXb4mBpLidTi2sZNKj9-bEyz1LvROJfypymPQ6uQxny72zCPZuQTKWszuqcqwMGrPg1-W1Z5j_p-ZKVO3YPt-yQ4iZPmQE-nLejMiPY-jTru1vRgWABHbkOsAT3BDhjZRqHfYCv814PzA3hC5WDGkZbgV6lR3uRtldtZ7oNdqHQRED6qZbb9RcXLImDYMyWBsfkZzt8VDOrWaC4YFi1U-qy53SUXYUoJWY9C073UD6JRGVZ55yXR_ORZ25NhvfHB0GXvCM6CEuuUjWLb2Ge0YMw",
+            "https://fonts.googleapis.com/css?family=3DRoboto:100,100i,300,=",
+            "https://fonts.googleapis.com/css?family=3DGoogle+Sans+Text:400=",
+            "http://www.w3.org/1999/xhtml",
+            "https://c.gle/AGSJxQwN9djbLauAv5PrAFP3vCPrawpg82pzQslloqREAh2pld=",
+            "https://c.gle/AGSJxQwa6-c0o7mW2NDISLMUZv4=",
+            "https://c.gle/AGSJxQwN9djbLauAv5PrAFP3vCPrawpg82pzQslloqREAh2pldq="
+        ]
+    },
+    "threat_intelligence": {
+        "abuseipdb": {
+            "score": 0,
+            "total_reports": 120,
+            "is_whitelisted": true,
+            "country": "FI",
+            "status": "Clean/Low Risk"
+        },
+        "virustotal_urls": []
+    },
+    "triage_status": "LOW RISK / Clean"
+}

@@ -1,0 +1,26 @@
+{
+    "timestamp": "2026-11-15T10:29:41.690945",
+    "email_metadata": {
+        "subject": "test phishing alert",
+        "sender": "Uday <uu3587257@gmail.com>",
+        "source_ip": "209.85.220.41",
+        "urls_found": [
+            "https://example.com/login?user=3Dtest&amp;amp;token=3D123](https://exa=",
+            "https://example.com/login?user=test&amp;token=123](https://example.com/login?user=test&amp;token=123)",
+            "https://example.com/login?user=3Dtest&amp;amp;token=3D1=",
+            "https://example.com/login?user=3Dtest&a=",
+            "https://example.com/login?user=test&token=123](https://example.com/login?user=test&token=123)"
+        ]
+    },
+    "threat_intelligence": {
+        "abuseipdb": {
+            "score": 0,
+            "total_reports": 210,
+            "is_whitelisted": true,
+            "country": "FI",
+            "status": "Clean/Low Risk"
+        },
+        "virustotal_urls": []
+    },
+    "triage_status": "LOW RISK / Clean"
+}

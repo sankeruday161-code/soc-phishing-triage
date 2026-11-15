@@ -1,0 +1,22 @@
+{
+    "timestamp": "2026-11-14T12:30:35.173649",
+    "email_metadata": {
+        "subject": "No Subject",
+        "sender": "Unknown Sender",
+        "source_ip": "185.199.108.153",
+        "urls_found": [
+            "https://malicious-login-fake-site.com/login"
+        ]
+    },
+    "threat_intelligence": {
+        "abuseipdb": {
+            "score": 100,
+            "total_reports": 220,
+            "is_whitelisted": false,
+            "country": "US",
+            "status": "Malicious"
+        },
+        "virustotal_urls": []
+    },
+    "triage_status": "HIGH RISK - Malicious Indicator Detected"
+}

@@ -1,0 +1,30 @@
+{
+    "timestamp": "2026-11-15T09:56:55.115133",
+    "email_metadata": {
+        "subject": "Security alert",
+        "sender": "Google <no-reply@accounts.google.com>",
+        "source_ip": "209.85.220.73",
+        "urls_found": [
+            "https://www.gstatic.com/images/branding/googlelogo/2x/goo=",
+            "https://lh3.googleusercontent.com/a/ACg8ocKahJz5HBympjMX_J7=",
+            "https://myaccount.google.com/notifications=",
+            "https://myaccount.google.com/notifications",
+            "https://myaccount.google.com/alert/nt/17947509420=",
+            "https://accounts.google.com/AccountChooser?Email=3Dmythilih=",
+            "https://myaccount.google.com/alert/nt/179475=",
+            "https://accounts.google.com/AccountChooser?Email=3Dmythilihere25=",
+            "https://accounts.google.com/AccountChooser?Email=mythilihere25@gmail.com&continue=https://myaccount.google.com/alert/nt/1794750942060?rfn%3D252%26rfnc%3D1%26eid%3D-4531889974605356257%26et%3D0"
+        ]
+    },
+    "threat_intelligence": {
+        "abuseipdb": {
+            "score": 0,
+            "total_reports": 3,
+            "is_whitelisted": true,
+            "country": "FI",
+            "status": "Clean/Low Risk"
+        },
+        "virustotal_urls": []
+    },
+    "triage_status": "LOW RISK / Clean"
+}
