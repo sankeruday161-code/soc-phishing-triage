@@ -1,3 +1,11 @@
+def clean_email(email_str):
+    """Masks sensitive email addresses for public GitHub reports."""
+    if "@" in email_str:
+        name, domain = email_str.split("@")
+        masked_name = name[:2] + "***" if len(name) > 2 else "***"
+        return f"{masked_name}@{domain}"
+    return "analyst@target.local"
+
 import json
 import os
 import time
