@@ -1,86 +1,123 @@
 import json
 import os
+import time
 from datetime import datetime
+from rich.console import Console
+from rich.progress import Progress, SpinnerColumn, TextColumn
+from rich.panel import Panel
+from rich import box
 
+console = Console()
 
-def generate_reports(email_data, ip_result, vt_results=None):
-  """Generates structured JSON and Markdown incident reports in a 'reports/' directory."""
-  # Ensure reports directory exists
-  reports_dir = "reports"
-  os.makedirs(reports_dir, exist_ok=True)
+def generate_reports(email_data, ip_result, url_results=None, attachment_results=None):
+    """Generates structured JSON and Markdown incident reports with animated progress."""
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    reports_dir = os.path.join(base_dir, "reports")
+    
+    # Animated progress for report generation
+    with Progress(
+        SpinnerColumn(spinner_name="dots12", style="bold cyan"),
+        TextColumn("[bold cyan]{task.description}"),
+        transient=True,
+    ) as progress:
+        task = progress.add_task(description="Compiling SOC incident data & generating forensic reports...", total=None)
+        time.sleep(0.5)
+        os.makedirs(reports_dir, exist_ok=True)
 
-  # Create a timestamped unique filename prefix
-  timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    url_results = url_results or []
+    attachment_results = attachment_results or []
 
-  # Build the master incident data dictionary
-  incident_data = {
-      "timestamp": datetime.now().isoformat(),
-      "email_metadata": {
-          "subject": email_data.get("subject", "No Subject"),
-          "sender": email_data.get("sender", "Unknown Sender"),
-          "source_ip": email_data.get("source_ip"),
-          "urls_found": email_data.get("urls", []),
-      },
-      "threat_intelligence": {
-          "abuseipdb": ip_result,
-          "virustotal_urls": vt_results if vt_results else [],
-      },
-      "triage_status": (
-          "HIGH RISK - Malicious Indicator Detected"
-          if (ip_result and ip_result.get("score", 0) > 50)
-          else "LOW RISK / Clean"
-      ),
-  }
+    # Determine overall risk level
+    is_ip_malicious = ip_result and ip_result.get("score", 0) > 25
+    is_url_malicious = any(u.get("status") == "Malicious" for u in url_results)
+    is_att_malicious = any(a.get("status") == "Malicious" for a in attachment_results)
 
-  # 1. Export as JSON
-  json_filename = os.path.join(reports_dir, f"incident_{timestamp}.json")
-  with open(json_filename, "w") as jf:
-    json.dump(incident_data, jf, indent=4)
+    if is_ip_malicious or is_url_malicious or is_att_malicious:
+        overall_status = "HIGH RISK - Malicious Indicator Detected"
+    else:
+        overall_status = "LOW RISK / Clean"
 
-  # 2. Export as Markdown Report
-  md_filename = os.path.join(reports_dir, f"incident_{timestamp}.md")
-  md_content = f"""# 🚨 Automated SOC Incident Triage Report
+    incident_data = {
+        "timestamp": datetime.now().isoformat(),
+        "email_metadata": {
+            "subject": email_data.get("subject", "No Subject"),
+            "sender": email_data.get("sender", "Unknown Sender"),
+            "source_ip": email_data.get("source_ip"),
+            "urls_found": email_data.get("urls", []),
+            "attachments_found": [a["filename"] for a in email_data.get("attachments", [])]
+        },
+        "threat_intelligence": {
+            "abuseipdb": ip_result,
+            "virustotal_urls": url_results,
+            "virustotal_attachments": attachment_results
+        },
+        "triage_status": overall_status
+    }
 
-* **Generated At:** `{incident_data['timestamp']}`
-* **Overall Status:** **{incident_data['triage_status']}**
+    # 1. Export as JSON
+    json_filename = os.path.join(reports_dir, f"incident_{timestamp}.json")
+    with open(json_filename, "w") as jf:
+        json.dump(incident_data, jf, indent=4)
+
+    # 2. Export as Markdown Report
+    md_filename = os.path.join(reports_dir, f"incident_{timestamp}.md")
+    md_content = f"""# Automated SOC Incident Triage Report
+
+- **Generated At:** `{incident_data['timestamp']}`
+- **Overall Status:** **{incident_data['triage_status']}**
 
 ---
 
-## 📧 Email Artifact Metadata
-* **Subject:** `{incident_data['email_metadata']['subject']}`
-* **Sender:** `{incident_data['email_metadata']['sender']}`
-* **Source IP:** `{incident_data['email_metadata']['source_ip']}`
+## Email Artifact Metadata
+- **Subject:** `{incident_data['email_metadata']['subject']}`
+- **Sender:** `{incident_data['email_metadata']['sender']}`
+- **Source IP:** `{incident_data['email_metadata']['source_ip']}`
 
 ### Extracted URLs:
 """
-  for url in incident_data["email_metadata"]["urls_found"]:
-    md_content += f"- `{url}`\n"
+    if incident_data["email_metadata"]["urls_found"]:
+        for url in incident_data["email_metadata"]["urls_found"]:
+            md_content += f"- `{url}`\n"
+    else:
+        md_content += "_No URLs extracted._\n"
 
-  md_content += f"""
+    md_content += f"""
 ---
 
-## 🔍 Threat Intelligence Results
+## Threat Intelligence Results
 
 ### 1. AbuseIPDB (Source IP Check)
-* **IP Address:** `{incident_data['email_metadata']['source_ip']}`
-* **Abuse Confidence Score:** `{ip_result.get('score', 'N/A')}` / 100
-* **Total Reports:** `{ip_result.get('total_reports', 'N/A')}`
-* **Country:** `{ip_result.get('country', 'N/A')}`
-* **Status:** `{ip_result.get('status', 'N/A')}`
+- **IP Address:** `{incident_data['email_metadata']['source_ip']}`
+- **Abuse Confidence Score:** `{ip_result.get('score', 'N/A')}` / 100
+- **Total Reports:** `{ip_result.get('total_reports', 'N/A')}`
+- **Country:** `{ip_result.get('country', 'N/A')}`
+- **Status:** `{ip_result.get('status', 'N/A')}`
 
 ### 2. VirusTotal (URL Reputation)
 """
-  if vt_results:
-    for res in vt_results:
-      md_content += f"- **URL:** `{res.get('url')}`\n  - **Status:** `{res.get('status')}`\n  - **Malicious Votes:** `{res.get('malicious_votes', 0)}`\n\n"
-  else:
-    md_content += "_No URLs analyzed or VirusTotal skipped._\n"
+    if url_results:
+        for res in url_results:
+            md_content += f"- **URL:** `{res.get('url')}`\n  - **Status:** `{res.get('status')}`\n  - **Detection Ratio:** `{res.get('detection_ratio', 'N/A')}`\n  - **Categories:** `{', '.join(res.get('categories', [])) or 'None'}`\n\n"
+    else:
+        md_content += "_No URLs analyzed._\n"
 
-  md_content += "\n---\n*Report automatically generated by SOC Phishing Triage Pipeline.*\n"
+    md_content += "\n### 3. VirusTotal (Attachment Analysis)\n"
+    if attachment_results:
+        for res in attachment_results:
+            md_content += f"- **File:** `{res.get('filename', 'Unknown')}`\n  - **Status:** `{res.get('status')}`\n  - **Detection Ratio:** `{res.get('detection_ratio', 'N/A')}`\n\n"
+    else:
+        md_content += "_No attachments analyzed._\n"
 
-  with open(md_filename, "w") as mf:
-    mf.write(md_content)
+    md_content += "\n---\n*Report automatically generated by SOC Phishing Triage Pipeline.*\n"
 
-  print(f"[+] Incident reports successfully generated:")
-  print(f"    - JSON: {json_filename}")
-  print(f"    - Markdown: {md_filename}")
+    with open(md_filename, "w") as mf:
+        mf.write(md_content)
+
+    # Rich formatted output box for successful report generation
+    report_box_text = (
+        "[bold green]✔ Incident Reports Successfully Generated & Secured![/bold green]\n\n"
+        f"[cyan]📁 JSON Report      :[/cyan] {json_filename}\n"
+        f"[cyan]📁 Markdown Report  :[/cyan] {md_filename}"
+    )
+    console.print(Panel(report_box_text, box=box.ROUNDED, border_style="green", title="Report Export Engine"))
